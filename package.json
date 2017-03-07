@@ -1,0 +1,26 @@
+{
+  "name": "emvents",
+  "version": "1.0.0",
+  "description": "This is our first project about Emvents",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebbizAdmin/emvents.git"
+  },
+  "keywords": [
+    "NodeCourse"
+  ],
+  "author": "Jason and Riccardo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WebbizAdmin/emvents/issues"
+  },
+  "homepage": "https://github.com/WebbizAdmin/emvents#readme",
+  "dependencies": {
+    "nodemon": "^1.11.0"
+  }
+}

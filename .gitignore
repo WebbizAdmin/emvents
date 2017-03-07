@@ -1,0 +1,14 @@
+.DS_Store
+.VolumeIcon.icns\
+.fseventsd\
+Icon\
+Icon/r\
+Icon\\r\
+Icon\\r\\r\
+Icon[\\r]\
+Icon^M\
+Icon^M^M\
+Icon?\
+/Icon\\r\
+/node_modules/\
+/node_modules/*
