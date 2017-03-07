@@ -1,17 +1,17 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Hello World!');
 })
 
-app.post('/add', function (req, res) {
-  res.send('Data recieved ' + req.body.name);
+app.post('/add', (req, res) => {
+  res.send(`Data recieved ${req.body.name}`);
 })
 
-app.listen(3005, function () {
+app.listen(3005, () => {
   console.log('Example app listening on port 3005!');
 })
