@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/WebbizAdmin/emvents#readme",
   "dependencies": {
+    "express": "^4.15.2",
     "nodemon": "^1.11.0"
   }
 }
