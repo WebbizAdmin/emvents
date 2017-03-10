@@ -1,22 +1,21 @@
-const events = [
-    {
-        id: 1,
-        title: 'Test Title',
-        description: 'This is a description',
-        date: new Date('October 13, 2014 11:13:00')
-    },
-    {
-        id: 2,
-        title: 'Test Title 2',
-        description: 'This is a description 2',
-        date: new Date('October 13, 2014 11:13:00')
-    },
-    {
-        id: 3,
-        title: 'Test Title 3',
-        description: 'This is a description 3',
-        date: new Date('October 13, 2014 11:13:00')
-    }
-]
+const express = require('express')
+const data = require('../data')
+const router = express.Router()
 
-module.exports = events;
+const filterEvents = (eventId) => {
+  return data.events.filter((obj) => {
+    return eventId == obj.id
+  })
+}
+router.get('/', (req, res) => {
+  res.send(data.events)
+})
+router.get('/:id', (req, res) => {
+  const event = filterEvents(req.params.id)
+  res.send(event)
+})
+router.post('/add', (req, res) => {
+  res.send(`Data recieved ${req.body.name}`)
+})
+
+module.exports = router
