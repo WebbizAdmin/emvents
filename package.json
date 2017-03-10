@@ -2,10 +2,10 @@
   "name": "emvents",
   "version": "1.0.0",
   "description": "This is our first project about Emvents",
-  "main": "server.js",
+  "main": "api",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon api"
   },
   "repository": {
     "type": "git",
