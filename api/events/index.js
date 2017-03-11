@@ -46,8 +46,9 @@ router.put('/:id', (req, res) => {
   const newData = [...oldEventsList, newEvent1]
   db = newData
   res.json({
-    message: 'Event has been added',
-    events: db
+    message: 'Event has been updated',
+    events: db,
+    updatedEvent: newEvent1
   })
 })
 
