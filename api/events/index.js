@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const event = filterEvents(req.params.id)
-  res.send(event)
+  res.send(event[0])
 })
 
 // 'v1/events/:id - PUT - update an existing record
