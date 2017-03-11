@@ -23,6 +23,8 @@ router.get('/:id', (req, res) => {
   const event = filterEvents(req.params.id)
   res.send(event)
 })
+
+// 'v1/events/:id - PUT - update an existing record
 router.put('/:id', (req, res) => {
   let newEvent = req.body
   const id = req.params.id
@@ -38,6 +40,8 @@ router.put('/:id', (req, res) => {
     events: db
   })
 })
+
+
 router.post('/', (req, res) => {
   let newEvent = req.body
   newEvent.id = uuidV1()
@@ -45,6 +49,18 @@ router.post('/', (req, res) => {
   db = newData
   res.json({
     message: 'Event has been added',
+    events: db
+  })
+})
+
+// '/v1/events/:id' - DELETE one event
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  remainingEvents = filterNotEvents(id)
+  db = remainingEvents
+  res.json({
+    status: 200,
+    message: 'Event has been deleted',
     events: db
   })
 })
