@@ -5,13 +5,12 @@ const uuidV1 = require('uuid/v1')
 
 let db = data.events
 
-function fakeAjaxCall () {
-  const t = new Promise((resolve, reject) => {
+const fakeAjaxCall = () => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(db)
     }, 2000)
   })
-  return t
 }
 
 const filterEvents = (eventId) => {
@@ -28,8 +27,6 @@ router.get('/', (req, res) => {
   fakeAjaxCall().then((obj, err) => {
     res.send(obj)
   })
-  // let db = await fakeAjaxCall()
-  // res.send(db)
 })
 
 router.get('/:id', (req, res) => {
