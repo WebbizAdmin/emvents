@@ -5,6 +5,15 @@ const uuidV1 = require('uuid/v1')
 
 let db = data.events
 
+function fakeAjaxCall () {
+  const t = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(db)
+    }, 2000)
+  })
+  return t
+}
+
 const filterEvents = (eventId) => {
   return db.filter((obj) => {
     return eventId == obj.id
@@ -16,7 +25,11 @@ const filterNotEvents = (eventId) => {
   })
 }
 router.get('/', (req, res) => {
-  res.send(db)
+  fakeAjaxCall().then((obj, err) => {
+    res.send(obj)
+  })
+  // let db = await fakeAjaxCall()
+  // res.send(db)
 })
 
 router.get('/:id', (req, res) => {
@@ -41,7 +54,6 @@ router.put('/:id', (req, res) => {
   })
 })
 
-
 router.post('/', (req, res) => {
   let newEvent = req.body
   newEvent.id = uuidV1()
@@ -55,7 +67,7 @@ router.post('/', (req, res) => {
 
 // '/v1/events/:id' - DELETE one event
 router.delete('/:id', (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id
   remainingEvents = filterNotEvents(id)
   db = remainingEvents
   res.json({
