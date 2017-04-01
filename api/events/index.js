@@ -38,42 +38,46 @@ router.get('/:id', (req, res) => {
 // 'v1/events/:id - PUT - update an existing record
 router.put('/:id', (req, res) => {
   let newEvent = req.body
-  const id = req.params.id
-  const oldEventsList = filterNotEvents(id)
-  const oldEvent = filterEvents(id)
-  console.log('oldEvent', oldEvent)
-  let newEvent1 = Object.assign({}, oldEvent[0], newEvent)
-  console.log('event', newEvent1)
-  const newData = [...oldEventsList, newEvent1]
-  db = newData
-  res.json({
-    message: 'Event has been updated',
-    events: db,
-    updatedEvent: newEvent1
+  newEvent.id = req.params.id
+  // const id = req.params.id
+  // const oldEventsList = filterNotEvents(id)
+  // const oldEvent = filterEvents(id)
+  // console.log('oldEvent', oldEvent)
+  // let newEvent1 = Object.assign({}, oldEvent[0], newEvent)
+  // console.log('event', newEvent1)
+  // const newData = [...oldEventsList, newEvent1]
+  // db = newData
+  console.log('update event.js', newEvent)
+  db.updateEvent(newEvent, () => {
+    res.json({
+      message: 'Event has been updated',
+      event: newEvent
+    })
   })
 })
 
 router.post('/', (req, res) => {
   let newEvent = req.body
-  newEvent.id = uuidV1()
+  // newEvent.id = uuidV1()
  // const newData = [...db, newEvent]
-  db.insertEvent(newEvent)
-  // db = newData
-  res.json({
-    message: 'Event has been added',
-    events: db
+  db.insertEvent(newEvent, () => {
+    res.json({
+      message: 'Event has been added'
+    })
   })
+  // db = newData
 })
 
 // '/v1/events/:id' - DELETE one event
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  remainingEvents = filterNotEvents(id)
-  db = remainingEvents
-  res.json({
-    status: 200,
-    message: 'Event has been deleted',
-    events: db
+  // const id = req.params.id
+  // remainingEvents = filterNotEvents(id)
+  // db = remainingEvents
+  db.deleteEvent(req.params.id, () => {
+    res.json({
+      status: 200,
+      message: 'Event has been deleted'
+    })
   })
 })
 

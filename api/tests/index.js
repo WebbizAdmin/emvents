@@ -3,6 +3,7 @@ const chaiHttp = require('chai-http')
 const expect = chai.expect
 const should = chai.should()
 const server = require('../')
+const uuidV1 = require('uuid/v1')
 
 chai.use(chaiHttp)
 
@@ -40,11 +41,12 @@ chai.use(chaiHttp)
 //       })
 //   })
 // })
+const getNewId = uuidV1()
 
 describe('/POST it creates a single event ', () => {
   it('it should POST an event', (done) => {
     let event = {
-      id: 6,
+      _id: getNewId,
       title: 'The Lord of the Rings',
       description: 'J.R.R. Tolkien',
       date: '2014-10-13T09:13:00.000Z'
@@ -61,37 +63,37 @@ describe('/POST it creates a single event ', () => {
   })
 })
 
-// describe('/PUT/:id it updates a single event by ID ', () => {
-//   it('it should PUT a single event', (done) => {
-//     let event = {
-//       id: 2,
-//       title: 'New Title for test'
-//     }
-//     chai.request(server)
-//       .put(`/v1/events/${event.id}`)
-//       .send(event)
-//       .end((err, res) => {
-//         let title = res.body.updatedEvent.title
-//         expect(title).to.equal('New Title for test')
-//         res.should.have.status(200)
-//         res.body.should.be.a('object')
-//         res.body.should.have.property('message').eql('Event has been updated')
-//         done()
-//       })
-//   })
-// })
+describe('/PUT/:id it updates a single event by ID ', () => {
+  it('it should PUT a single event', (done) => {
+    let event = {
+      _id: getNewId,
+      title: 'New Title for test'
+    }
+    chai.request(server)
+      .put(`/v1/events/${event._id}`)
+      .send(event)
+      .end((err, res) => {
+        let title = res.body.event.title
+        expect(title).to.equal('New Title for test')
+        res.should.have.status(200)
+        res.body.should.be.a('object')
+        res.body.should.have.property('message').eql('Event has been updated')
+        done()
+      })
+  })
+})
 
-// describe('/DELETE/:id it delete a single event by ID ', () => {
-//   it('it should DELETE a single event', (done) => {
-//     let event = {
-//       id: 2
-//     }
-//     chai.request(server)
-//       .delete(`/v1/events/${event.id}`)
-//       .end((err, res) => {
-//         res.should.have.status(200)
-//         res.body.should.have.property('message').eql('Event has been deleted')
-//         done()
-//       })
-//   })
-// })
+describe('/DELETE/:id it delete a single event by ID ', () => {
+  it('it should DELETE a single event', (done) => {
+    let event = {
+      _id: getNewId
+    }
+    chai.request(server)
+      .delete(`/v1/events/${event._id}`)
+      .end((err, res) => {
+        res.should.have.status(200)
+        res.body.should.have.property('message').eql('Event has been deleted')
+        done()
+      })
+  })
+})
