@@ -1,9 +1,10 @@
 const express = require('express')
 const data = require('../data')
+
 const router = express.Router()
 const uuidV1 = require('uuid/v1')
 
-let db = data.events
+let db = data.db
 
 const fakeAjaxCall = () => {
   return new Promise((resolve, reject) => {
@@ -55,8 +56,9 @@ router.put('/:id', (req, res) => {
 router.post('/', (req, res) => {
   let newEvent = req.body
   newEvent.id = uuidV1()
-  const newData = [...db, newEvent]
-  db = newData
+ // const newData = [...db, newEvent]
+  db.insertEvent(newEvent)
+  // db = newData
   res.json({
     message: 'Event has been added',
     events: db
