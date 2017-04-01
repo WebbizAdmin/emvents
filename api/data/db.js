@@ -21,12 +21,6 @@ const insertEvent = (event, cb) => {
       console.log('Close de connection')
       db.close()
     })
-    const collection = db.collection('events')
-    collection.insertMany([
-      event
-    ], (err, result) => {
-      assert.equal(err, null)
-    })
   })
 }
 module.exports = {
