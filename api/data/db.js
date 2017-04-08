@@ -16,7 +16,15 @@ const insertEvent = (event, callback) => {
     callback()
   })
 }
-
+const searchByTitle = (searchTerm, cb) => {
+  const r = { 'title': { '$regex': searchTerm, '$options': 'i' } }
+  Event.find(r, (err, events) => {
+    if (err) {
+      console.log('ERROR', err)
+    }
+    return cb(events)
+  })
+}
 // Update
 const updateEvent = (event, callback) => {
   console.log('update', event)
@@ -45,5 +53,6 @@ const deleteEvent = (id, callback) => {
 module.exports = {
   insertEvent,
   updateEvent,
-  deleteEvent
+  deleteEvent,
+  searchByTitle
 }

@@ -34,6 +34,14 @@ router.get('/:id', (req, res) => {
   const event = filterEvents(req.params.id)
   res.send(event[0])
 })
+router.get('/search/:title', (req, res) => {
+  // const event = filterEvents(req.params.id)
+  // res.send(event[0])
+  db.searchByTitle(req.params.title, (events) => {
+    console.log('returned events', events)
+    res.json(events)
+  })
+})
 
 // 'v1/events/:id - PUT - update an existing record
 router.put('/:id', (req, res) => {
