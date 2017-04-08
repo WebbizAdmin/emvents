@@ -1,9 +1,9 @@
+require('../data/connect')
 const express = require('express')
-const data = require('../data')
-
+const db = require('./db')
 const router = express.Router()
 
-let db = data.db
+// let db = data.db
 
 const fakeAjaxCall = () => {
   return new Promise((resolve, reject) => {
@@ -65,14 +65,12 @@ router.put('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   let newEvent = req.body
-  // newEvent.id = uuidV1()
- // const newData = [...db, newEvent]
-  db.insertEvent(newEvent, () => {
+  db.insertEvent(newEvent, (err, event) => {
     res.json({
-      message: 'Event has been added'
+      message: 'Event has been added',
+      event
     })
   })
-  // db = newData
 })
 
 // '/v1/events/:id' - DELETE one event

@@ -1,6 +1,19 @@
+require('../data/connect')
 const express = require('express')
-const data = require('../data')
-
+const db = require('./db')
 const router = express.Router()
 
-let db = data.db
+// Create User
+router.post('/', (req, res) => {
+  console.log('User data: ', req.body)
+  let newUser = req.body
+
+  db.insertUser(newUser, (err, user) => {
+    res.json({
+      message: 'User has been added',
+      user
+    })
+  })
+})
+
+module.exports = router

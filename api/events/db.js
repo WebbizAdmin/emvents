@@ -1,19 +1,15 @@
-const mongoClient = require('mongodb').MongoClient
 const assert = require('assert')
-const mongoose = require('mongoose')
-const Event = require('../events/model')
-
-const url = 'mongodb://localhost:27017/emvents'
-mongoose.connect(url)
+const Event = require('./model')
 
 // Insert
 const insertEvent = (event, callback) => {
   console.log('incert', event)
+
   const newEvent = new Event(event)
   console.log('newEvent', newEvent)
-  newEvent.save(() => {
+  newEvent.save((err, event) => {
     console.log('event saved')
-    callback()
+    callback(err, event)
   })
 }
 const searchByTitle = (searchTerm, cb) => {
@@ -25,6 +21,7 @@ const searchByTitle = (searchTerm, cb) => {
     return cb(events)
   })
 }
+
 // Update
 const updateEvent = (event, callback) => {
   console.log('update', event)
