@@ -2,7 +2,6 @@ const express = require('express')
 const data = require('../data')
 
 const router = express.Router()
-const uuidV1 = require('uuid/v1')
 
 let db = data.db
 
