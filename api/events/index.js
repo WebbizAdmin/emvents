@@ -44,7 +44,7 @@ router.get('/search/:title', (req, res) => {
 })
 
 // 'v1/events/:id - PUT - update an existing record
-router.put('/:id', (req, res) => {
+router.put('/:id', passport.authenticate('basic', {session: false}), (req, res) => {
   let newEvent = req.body
   newEvent.id = req.params.id
   // const id = req.params.id
@@ -64,7 +64,7 @@ router.put('/:id', (req, res) => {
   })
 })
 
-router.post('/', passport.authenticate('basic'), (req, res) => {
+router.post('/', passport.authenticate('basic', {session: false}), (req, res) => {
   let newEvent = req.body
   db.insertEvent(newEvent, (err, event) => {
     console.log('Response', res)
@@ -76,7 +76,7 @@ router.post('/', passport.authenticate('basic'), (req, res) => {
 })
 
 // '/v1/events/:id' - DELETE one event
-router.delete('/:id', (req, res) => {
+router.delete('/:id', passport.authenticate('basic', {session: false}), (req, res) => {
   // const id = req.params.id
   // remainingEvents = filterNotEvents(id)
   // db = remainingEvents

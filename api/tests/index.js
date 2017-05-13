@@ -52,6 +52,7 @@ describe('/POST it creates a single event if autorized ', () => {
     }
     chai.request(server)
       .post(`/v1/events`)
+      .auth('Jason', 'test')
       .send(event)
       .end((err, res) => {
         console.log('POST Test res: ', res.body.event._id)
@@ -72,6 +73,7 @@ describe('/PUT/:id it updates a single event by ID ', () => {
     }
     chai.request(server)
       .put(`/v1/events/${event._id}`)
+      .auth('Jason', 'test')
       .send(event)
       .end((err, res) => {
         let title = res.body.event.title
@@ -91,6 +93,7 @@ describe('/DELETE/:id it delete a single event by ID ', () => {
     }
     chai.request(server)
       .delete(`/v1/events/${event._id}`)
+      .auth('Jason', 'test')
       .end((err, res) => {
         res.should.have.status(200)
         res.body.should.have.property('message').eql('Event has been deleted')
