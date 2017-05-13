@@ -43,7 +43,7 @@ chai.use(chaiHttp)
 // })
 let getNewId = null
 
-describe('/POST it creates a single event ', () => {
+describe('/POST it creates a single event if autorized ', () => {
   it('it should POST an event', (done) => {
     let event = {
       title: 'The Lord of the Rings',

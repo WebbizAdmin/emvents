@@ -2,6 +2,7 @@ require('../data/connect')
 const express = require('express')
 const db = require('./db')
 const router = express.Router()
+const passport = require('passport')
 
 // let db = data.db
 
@@ -63,9 +64,10 @@ router.put('/:id', (req, res) => {
   })
 })
 
-router.post('/', (req, res) => {
+router.post('/', passport.authenticate('basic'), (req, res) => {
   let newEvent = req.body
   db.insertEvent(newEvent, (err, event) => {
+    console.log('Response', res)
     res.json({
       message: 'Event has been added',
       event
