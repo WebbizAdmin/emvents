@@ -1,8 +1,24 @@
-const acl = require('acl')
-const dbInstance = require('../data/connect')
 
-const configAcl = new acl(new acl.mongodbBackend(dbInstance, 'users'))
+const node_acl = require('acl')
 
-acl.allow('members', 'events', ['edit', 'view', 'delete'])
+const initializeAcl = (db) => {
+  const mongoBackend = new node_acl.mongodbBackend(db)
+  const acl = new node_acl(mongoBackend)
+  // console.log('working', acl)
+  acl.allow([
+    {
+      roles: 'members',
+      allows: [
+        { resources: '/events', permissions: '*' }
+      ]
+    }])
+}
 
-acl.addUserRoles('jason', 'members')
+const addUserPermission = (userName) => {
+  acl.addUserRoles(userName, 'members')
+}
+
+module.exports = {
+  initializeAcl,
+  addUserPermission
+}
