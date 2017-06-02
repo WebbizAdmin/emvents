@@ -47,6 +47,7 @@ router.get('/search/:title', (req, res) => {
 router.put('/:id', passport.authenticate('basic', {session: false}), (req, res) => {
   let newEvent = req.body
   newEvent.id = req.params.id
+  newEvent.user = req.user.id
   // const id = req.params.id
   // const oldEventsList = filterNotEvents(id)
   // const oldEvent = filterEvents(id)
@@ -66,6 +67,7 @@ router.put('/:id', passport.authenticate('basic', {session: false}), (req, res) 
 })
 
 router.post('/', passport.authenticate('basic', {session: false}), (req, res) => {
+  console.log('user11', req.user)
   let newEvent = req.body
   db.insertEvent(newEvent, (err, event) => {
     // console.log('Response', res)

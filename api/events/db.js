@@ -23,10 +23,10 @@ const searchByTitle = (searchTerm, cb) => {
 }
 
 // Update
-const updateEvent = (event, userId, callback) => {
-  console.log('update', event)
+const updateEvent = (event, callback) => {
+  console.log('UPDATING EVENT', event)
   Event.findById(event._id, (err, newEvent) => {
-    if (event.user._id === userId) {
+    if (event.user === newEvent.user) {
       console.log('User authorized')
       console.log('event from db', newEvent)
       newEvent.title = event.title
@@ -36,7 +36,7 @@ const updateEvent = (event, userId, callback) => {
         callback()
       })
     } else {
-      console.log('User unauthorized')
+      console.log('User unauthorized NOT UPDATING')
       callback()
     }
   })
