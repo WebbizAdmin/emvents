@@ -23,16 +23,22 @@ const searchByTitle = (searchTerm, cb) => {
 }
 
 // Update
-const updateEvent = (event, callback) => {
+const updateEvent = (event, userId, callback) => {
   console.log('update', event)
   Event.findById(event._id, (err, newEvent) => {
-    console.log('event from db', newEvent)
-    newEvent.title = event.title
-    newEvent.description = event.description
-    newEvent.save(() => {
-      console.log('event updated')
+    if (event.user._id === userId) {
+      console.log('User authorized')
+      console.log('event from db', newEvent)
+      newEvent.title = event.title
+      newEvent.description = event.description
+      newEvent.save(() => {
+        console.log('event updated')
+        callback()
+      })
+    } else {
+      console.log('User unauthorized')
       callback()
-    })
+    }
   })
 }
 

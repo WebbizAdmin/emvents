@@ -55,7 +55,8 @@ router.put('/:id', passport.authenticate('basic', {session: false}), (req, res) 
   // console.log('event', newEvent1)
   // const newData = [...oldEventsList, newEvent1]
   // db = newData
-  console.log('update event.js', newEvent)
+  console.log('Authenticated User', res.user)
+  // console.log('update event.js', newEvent)
   db.updateEvent(newEvent, () => {
     res.json({
       message: 'Event has been updated',
@@ -67,7 +68,7 @@ router.put('/:id', passport.authenticate('basic', {session: false}), (req, res) 
 router.post('/', passport.authenticate('basic', {session: false}), (req, res) => {
   let newEvent = req.body
   db.insertEvent(newEvent, (err, event) => {
-    console.log('Response', res)
+    // console.log('Response', res)
     res.json({
       message: 'Event has been added',
       event

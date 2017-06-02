@@ -15,7 +15,7 @@ router.get('/',
 
 // Create User
 router.post('/', (req, res) => {
-  console.log('User data: ', req.body)
+  // console.log('User data: ', req.body)
   let newUser = req.body
 
   db.insertUser(newUser, (err, user) => {

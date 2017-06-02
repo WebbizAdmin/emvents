@@ -4,7 +4,7 @@
   "description": "This is our first project about Emvents",
   "main": "api",
   "scripts": {
-    "test": "mocha api/tests --timeout 10000",
+    "test": "mocha api/tests/index.js --timeout 10000",
     "dev": "nodemon api"
   },
   "repository": {
